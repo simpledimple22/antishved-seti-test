@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0a0d16">
+<title>Сети — тренажёр теста</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="styles.css?v=4">
+</head>
+<body>
+<div class="bg-glow" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="grain"></span></div>
+
+<div id="loader" class="loader"><div class="loader-badge"><span>⚡</span></div><div class="loader-text">загружаем вопросы…</div></div>
+
+<div id="app">
+  <!-- HOME -->
+  <section id="home" class="screen">
+    <header class="home-head">
+      <div class="logo"><span>⚡</span></div>
+      <h1>Электрические <span class="grad">сети</span></h1>
+      <p class="sub">Тренажёр теста · <span id="qtotal">0</span> вопросов · 24 раздела</p>
+    </header>
+
+    <div class="stat-row" id="globalStats"></div>
+
+    <div class="modes">
+      <button class="mode-btn primary" data-mode="all"><span class="mi">📚</span><span><b>Весь тест</b><i>все вопросы подряд</i></span></button>
+      <button class="mode-btn" data-mode="random"><span class="mi">🎲</span><span><b>Случайные 25</b><i>быстрая тренировка</i></span></button>
+      <button class="mode-btn" data-mode="wrong"><span class="mi">🔁</span><span><b>Работа над ошибками</b><i>вопросы с ошибками</i></span></button>
+      <button class="mode-btn" data-mode="flagged"><span class="mi">⚠️</span><span><b>Спорные вопросы</b><i>требуют проверки по книге</i></span></button>
+    </div>
+
+    <div class="opts">
+      <label class="switch"><input type="checkbox" id="shuffleOpts" checked><span>Перемешивать варианты ответов</span></label>
+    </div>
+
+    <h2 class="section-title">Разделы</h2>
+    <div id="sectionList" class="section-list"></div>
+
+    <button id="resetBtn" class="ghost-btn">↺ Сбросить весь прогресс</button>
+    <p class="footnote">Правильные ответы взяты из отметок в учебнике. Вопросы с меткой ⚠️ стоит перепроверить.</p>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="screen hidden">
+    <div class="quiz-top">
+      <button id="backHome" class="icon-btn">✕</button>
+      <div class="progress"><div id="progressBar" class="progress-bar"></div></div>
+      <div id="counter" class="counter">1/1</div>
+    </div>
+    <div class="quiz-scroll">
+      <div id="qmeta" class="qmeta"></div>
+      <div id="qfigure" class="qfigure hidden"></div>
+      <h2 id="qtext" class="qtext"></h2>
+      <div id="options" class="options"></div>
+      <div id="explain" class="explain hidden"></div>
+    </div>
+    <div class="quiz-actions">
+      <button id="actionBtn" class="action-btn" disabled>Проверить</button>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="screen hidden">
+    <div class="result-card">
+      <span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span>
+      <span class="dot d4"></span><span class="dot d5"></span><span class="dot d6"></span>
+      <div id="resEmoji" class="res-emoji">🎉</div>
+      <div id="scoreRing" class="score-ring" style="--pct:0">
+        <div class="score-ring-inner">
+          <div id="resScore" class="res-score"></div>
+          <div id="resPct" class="res-pct"></div>
+        </div>
+      </div>
+      <h2 id="resTitle">Готово!</h2>
+      <p id="resSub" class="res-sub"></p>
+    </div>
+    <div class="result-actions">
+      <button id="reviewWrong" class="action-btn">Разобрать ошибки</button>
+      <button id="toHome" class="ghost-btn">На главную</button>
+    </div>
+  </section>
+</div>
+<script src="app.js?v=5"></script>
+</body>
+</html>
