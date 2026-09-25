@@ -380,3 +380,79 @@ body{
 
 .result-actions{ width:100%; max-width:420px; display:flex; flex-direction:column; gap:10px; }
 .result-actions .ghost-btn{ margin-top:0; }
+
+/* ============================================================
+   МОДУЛЬ «РАСЧЁТ РЕЖИМА» (formula-quiz.js)
+   ============================================================ */
+.fq{display:flex;flex-direction:column;gap:12px;padding-bottom:24px}
+.fq-head{display:flex;align-items:center;gap:12px;margin:2px 0 2px}
+.fq-head h2{margin:0;font-size:21px;font-weight:800;letter-spacing:-.3px}
+.fq-lead{margin:0;color:var(--hint);font-size:13.5px;line-height:1.5}
+.fq-muted{color:var(--hint);font-size:13px;line-height:1.45}
+.fq-meta{color:var(--hint);font-size:11.5px;font-weight:700}
+.fq-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);padding:14px 15px;
+  display:flex;flex-direction:column;gap:8px;text-align:left;color:var(--text);font-family:var(--font);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:var(--shadow-soft)}
+.fq-card p{margin:0}
+.fq-test{cursor:pointer;width:100%;transition:transform .15s ease}
+.fq-test:active{transform:scale(.985)}
+.fq-test b{font-size:15.5px;font-weight:750}
+.fq-spot{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fq-spot-title{font-size:14px;font-weight:650}
+.fq-spot-n{font-weight:800;color:var(--bad);font-variant-numeric:tabular-nums}
+.fq-spot-desc{margin:-4px 0 4px}
+.fq-seg{display:flex;gap:6px;flex-wrap:wrap}
+.fq-seg-btn{flex:1;min-width:120px;background:var(--surface2);border:1px solid var(--border);color:var(--hint);font-family:var(--font);
+  font-size:12.5px;font-weight:700;border-radius:12px;padding:9px 8px;cursor:pointer}
+.fq-seg-btn.on{background:var(--accent-grad);color:#fff;border-color:transparent}
+.fq-run-top{display:flex;align-items:center;gap:12px}
+.fq-actions{display:flex;flex-direction:column;gap:9px;margin-top:6px}
+.fq-input-row{display:flex;align-items:center;gap:10px}
+.fq-input{flex:1;min-width:0;background:var(--surface2);border:2px solid var(--border);color:var(--text);border-radius:14px;
+  padding:13px 14px;font-size:17px;font-family:var(--font);font-weight:650;outline:none}
+.fq-input:focus{border-color:var(--accent)}
+.fq-unit{color:var(--hint);font-weight:700;min-width:44px}
+.fq-expl{margin-top:10px;font-weight:500;color:var(--text);font-size:13.5px}
+.fq-order{display:flex;flex-direction:column;gap:8px}
+.fq-order-row{display:flex;align-items:center;gap:10px;background:var(--glass);border:2px solid transparent;
+  box-shadow:inset 0 0 0 1px var(--border);border-radius:14px;padding:10px 12px}
+.fq-order-row.ok{border-color:var(--ok);background:var(--ok-bg)}
+.fq-order-row.bad{border-color:var(--bad);background:var(--bad-bg)}
+.fq-order-n{flex:none;width:24px;height:24px;border-radius:8px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px}
+.fq-order-text{flex:1;font-size:14px}
+.fq-score{align-items:center;text-align:center}
+.fq-score-n{font-size:40px;font-weight:800;background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tex{font-size:1.02em}
+.tex-raw{font-family:ui-monospace,Menlo,monospace;font-size:.9em;color:var(--hint)}
+.katex{font-size:1.05em}
+.qtext .katex,.otext .katex{font-size:1em}
+
+/* разбор задачи */
+.fq-group{background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.fq-group>summary{cursor:pointer;padding:13px 15px;font-weight:750;font-size:14.5px;list-style:none}
+.fq-group>summary::-webkit-details-marker{display:none}
+.fq-group>summary::before{content:'▸';display:inline-block;margin-right:8px;color:var(--accent2);transition:transform .15s}
+.fq-group[open]>summary::before{transform:rotate(90deg)}
+.fq-step{border-top:1px solid var(--border);padding:13px 15px;display:flex;flex-direction:column;gap:6px}
+.fq-step-title{font-weight:750;font-size:14px}
+.fq-formula{overflow-x:auto;overflow-y:hidden;padding:2px 0;text-align:left}
+.fq-formula .katex-display{margin:.3em 0;text-align:left}
+.fq-subst{color:var(--hint)}
+.fq-step-result{font-size:15px}
+.fq-why{margin:0;color:var(--hint);font-size:13px;line-height:1.5}
+.fq-pitfall{margin:0;background:var(--warn-bg);color:var(--warn);border-radius:12px;padding:9px 11px;font-size:12.5px;font-weight:650;line-height:1.45}
+.fq-check{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:4px}
+.fq-check .fq-input{font-size:15px;padding:9px 12px;min-width:120px}
+.fq-select{background:var(--surface2);color:var(--text);border:2px solid var(--border);border-radius:12px;padding:9px 10px;font-family:var(--font);font-size:14px}
+.fq-check-btn{margin-top:0!important;width:auto!important;padding:9px 14px!important}
+.fq-diag{flex-basis:100%;border-radius:12px;padding:10px 12px;font-size:13.5px;font-weight:600;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.fq-diag.ok{background:var(--ok-bg);color:var(--ok)}
+.fq-diag.bad{background:var(--bad-bg);color:var(--bad)}
+.fq-diag .fq-muted{font-weight:500}
+.fq-diag .ghost-btn{margin-top:2px!important;width:auto!important;padding:8px 12px!important;font-size:12.5px!important}
+.fq-link{background:none;border:none;color:var(--accent2);font-family:var(--font);font-weight:700;font-size:13px;cursor:pointer;text-align:left;padding:4px 0}
+.fq-scroll-x{overflow-x:auto}
+.fq-table{border-collapse:collapse;width:100%;font-size:12.5px;font-variant-numeric:tabular-nums}
+.fq-table th,.fq-table td{padding:7px 8px;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap}
+.fq-table th:first-child,.fq-table td:first-child{text-align:left;font-weight:700;position:sticky;left:0}
+.fq-table th{color:var(--hint);font-weight:800}

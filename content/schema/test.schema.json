@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "test.schema.json",
+  "title": "Тест (набор вопросов)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "title", "description", "questions"],
+  "properties": {
+    "id": { "enum": ["test1", "test2", "test3"] },
+    "title": { "type": "string", "minLength": 3 },
+    "description": { "type": "string", "minLength": 3 },
+    "questions": { "type": "array", "minItems": 10, "items": { "$ref": "question.schema.json" } }
+  }
+}

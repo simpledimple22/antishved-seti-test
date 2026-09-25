@@ -253,7 +253,10 @@ $('#toHome').onclick=renderHome;
 
 /* ===== screens ===== */
 function showScreen(name){
-  ['home','quiz','result'].forEach(n=>$('#'+n).classList.toggle('hidden', n!==name));
+  document.querySelectorAll('.screen').forEach(sc=>sc.classList.toggle('hidden', sc.id!==name));
   if(name!=='quiz' && TG&&TG.MainButton){ try{TG.MainButton.hide();}catch(e){} }
   window.scrollTo(0,0);
 }
+
+/* Мост для модуля «Расчёт режима» (formula-quiz.js, ES-модуль) */
+window.SetiApp = { showScreen, renderHome, haptic, alertMsg, get IN_TG(){ return IN_TG; }, TG };

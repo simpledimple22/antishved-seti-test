@@ -1,3 +1,4 @@
 .DS_Store
 *.log
 Test1.pdf
+node_modules/

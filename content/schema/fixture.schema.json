@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "fixture.schema.json",
+  "title": "Эталонная фикстура",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "description", "variant", "tolerance_pct", "expected"],
+  "definitions": { "S": { "type": "object", "required": ["P", "Q"], "properties": { "P": { "type": "number" }, "Q": { "type": "number" } }, "additionalProperties": false } },
+  "properties": {
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "variant": { "$ref": "variant.schema.json" },
+    "tolerance_pct": { "type": "number", "exclusiveMinimum": 0 },
+    "expected": {
+      "type": "object", "additionalProperties": false, "required": ["params", "iterations", "result"],
+      "properties": {
+        "params": { "type": "object", "required": ["lg_ratio", "x0", "b0", "R_line", "X_line", "B_half", "R_T", "X_T", "dP_x_total", "dQ_x_total", "Q1"], "additionalProperties": { "type": "number" } },
+        "iterations": {
+          "type": "array", "minItems": 3,
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["Qc1", "dS_line", "Qc2", "dS_T", "S2", "U2", "U1"],
+            "properties": {
+              "Qc1": { "type": "number" }, "Qc2": { "type": "number" }, "U1": { "type": "number" }, "U2": { "type": "number" },
+              "dS_line": { "$ref": "#/definitions/S" }, "dS_T": { "$ref": "#/definitions/S" }, "S2": { "$ref": "#/definitions/S" }
+            }
+          }
+        },
+        "result": {
+          "type": "object", "additionalProperties": false, "required": ["U1", "U2", "S2", "U_nn", "loss_total_P", "loss_total_pct"],
+          "properties": { "U1": { "type": "number" }, "U2": { "type": "number" }, "S2": { "$ref": "#/definitions/S" }, "U_nn": { "type": "number" }, "loss_total_P": { "type": "number" }, "loss_total_pct": { "type": "number" } }
+        }
+      }
+    }
+  }
+}

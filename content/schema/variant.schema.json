@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "variant.schema.json",
+  "title": "Вариант задачи (тип A или B)",
+  "definitions": {
+    "wire": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "R0", "d_mm", "D_m"],
+      "properties": { "name": { "type": "string" }, "R0": { "type": "number", "exclusiveMinimum": 0 }, "d_mm": { "type": "number", "exclusiveMinimum": 0 }, "D_m": { "type": "number", "exclusiveMinimum": 0 } }
+    },
+    "power": {
+      "type": "object", "additionalProperties": false, "required": ["P", "tgphi"],
+      "properties": { "P": { "type": "number", "exclusiveMinimum": 0 }, "tgphi": { "type": "number", "minimum": 0 } }
+    },
+    "transformer": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "n", "dPk_kW", "uk_pct", "dPx_kW", "Ix_pct", "Uvn", "Unn", "Sn"],
+      "properties": {
+        "name": { "type": "string" }, "n": { "type": "integer", "minimum": 1 }, "dPk_kW": { "type": "number", "minimum": 0 },
+        "uk_pct": { "type": "number", "minimum": 0 }, "dPx_kW": { "type": "number", "minimum": 0 }, "Ix_pct": { "type": "number", "minimum": 0 },
+        "Uvn": { "type": "number", "exclusiveMinimum": 0 }, "Unn": { "type": "number", "exclusiveMinimum": 0 }, "Sn": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+    "line": {
+      "type": "object", "additionalProperties": false, "required": ["wire", "L", "n"],
+      "properties": { "wire": { "$ref": "#/definitions/wire" }, "L": { "type": "number", "exclusiveMinimum": 0 }, "n": { "type": "integer", "minimum": 1 } }
+    }
+  },
+  "oneOf": [
+    {
+      "type": "object", "additionalProperties": false,
+      "required": ["type", "U_nom", "wire", "L", "n_line", "transformer", "S_start", "U_end"],
+      "properties": {
+        "type": { "const": "A" }, "U_nom": { "type": "number" }, "wire": { "$ref": "#/definitions/wire" }, "L": { "type": "number" },
+        "n_line": { "type": "integer", "minimum": 1 }, "transformer": { "$ref": "#/definitions/transformer" },
+        "S_start": { "$ref": "#/definitions/power" }, "U_end": { "type": "number" }, "seed": { "type": "integer" }, "attempt": { "type": "integer" }
+      }
+    },
+    {
+      "type": "object", "additionalProperties": false,
+      "required": ["type", "U_nom", "lines", "mid_load", "S_start", "U_end"],
+      "properties": {
+        "type": { "const": "B" }, "U_nom": { "type": "number" },
+        "lines": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "$ref": "#/definitions/line" } },
+        "mid_load": { "$ref": "#/definitions/power" }, "S_start": { "$ref": "#/definitions/power" }, "U_end": { "type": "number" },
+        "seed": { "type": "integer" }, "attempt": { "type": "integer" }
+      }
+    }
+  ]
+}

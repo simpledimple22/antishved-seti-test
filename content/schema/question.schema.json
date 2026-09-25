@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "question.schema.json",
+  "title": "Вопрос теста «Расчёт режима»",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "test_id", "type", "topic", "difficulty", "stem", "explanation", "related_step"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^t[123]-q[0-9]{2}$" },
+    "test_id": { "enum": ["test1", "test2", "test3"] },
+    "type": { "enum": ["formula_choice", "spot_the_error", "micro_calc", "units_check", "effect_direction", "step_order", "concept"] },
+    "topic": { "type": "string", "minLength": 1 },
+    "difficulty": { "enum": [1, 2, 3] },
+    "stem": { "type": "string", "minLength": 10 },
+    "explanation": { "type": "string", "minLength": 20 },
+    "related_step": {
+      "enum": ["scheme", "lg_ratio", "x0", "b0", "R_line", "X_line", "B_line", "R_T", "X_T", "dP_x_total", "dQ_x_total", "Q1", "Qc", "dS_line", "dS_T", "S_end", "dU", "U_modulus", "convergence", "U_nn", "losses"]
+    },
+    "options": {
+      "type": "array", "minItems": 3, "maxItems": 5,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "text", "correct", "misconception", "feedback"],
+        "properties": {
+          "id": { "enum": ["a", "b", "c", "d", "e"] },
+          "text": { "type": "string", "minLength": 1 },
+          "correct": { "type": "boolean" },
+          "misconception": { "type": ["string", "null"] },
+          "feedback": { "type": "string", "minLength": 5 }
+        }
+      }
+    },
+    "items": {
+      "type": "array", "minItems": 3, "maxItems": 8,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["id", "text"],
+        "properties": { "id": { "type": "string", "pattern": "^s[0-9]+$" }, "text": { "type": "string", "minLength": 3 } }
+      }
+    },
+    "answer": {
+      "type": "object",
+      "properties": {
+        "quantity": { "type": "string" },
+        "iteration": { "type": "integer", "minimum": 1 },
+        "value": { "type": "number" },
+        "unit": { "type": "string" },
+        "digits": { "type": "integer", "minimum": 0, "maximum": 6 },
+        "tolerance_pct": { "type": "number", "exclusiveMinimum": 0 },
+        "order": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "type": { "enum": ["formula_choice", "spot_the_error", "units_check", "effect_direction", "concept"] } } },
+      "then": { "required": ["options"], "not": { "anyOf": [{ "required": ["answer"] }, { "required": ["items"] }] } }
+    },
+    {
+      "if": { "properties": { "type": { "const": "micro_calc" } } },
+      "then": {
+        "required": ["answer"],
+        "properties": { "answer": { "type": "object", "required": ["quantity", "iteration", "value", "unit", "digits", "tolerance_pct"] } },
+        "not": { "anyOf": [{ "required": ["options"] }, { "required": ["items"] }] }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "step_order" } } },
+      "then": {
+        "required": ["items", "answer"],
+        "properties": { "answer": { "type": "object", "required": ["order"] } },
+        "not": { "required": ["options"] }
+      }
+    }
+  ]
+}

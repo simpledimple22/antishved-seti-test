@@ -11,7 +11,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<link rel="stylesheet" href="styles.css?v=4">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
 <div class="bg-glow" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="grain"></span></div>
@@ -33,6 +35,7 @@
       <button class="mode-btn primary" data-mode="all"><span class="mi">📚</span><span><b>Весь тест</b><i>все вопросы подряд</i></span></button>
       <button class="mode-btn" data-mode="random"><span class="mi">🎲</span><span><b>Случайные 25</b><i>быстрая тренировка</i></span></button>
       <button class="mode-btn" data-mode="wrong"><span class="mi">🔁</span><span><b>Работа над ошибками</b><i>вопросы с ошибками</i></span></button>
+      <button class="mode-btn" data-mode="calc"><span class="mi">🧮</span><span><b>Расчёт режима</b><i>формулы, разбор задачи, диагностика ошибок</i></span></button>
       <button class="mode-btn" data-mode="flagged"><span class="mi">⚠️</span><span><b>Спорные вопросы</b><i>требуют проверки по книге</i></span></button>
     </div>
 
@@ -46,6 +49,9 @@
     <button id="resetBtn" class="ghost-btn">↺ Сбросить весь прогресс</button>
     <p class="footnote">Правильные ответы взяты из отметок в учебнике. Вопросы с меткой ⚠️ стоит перепроверить.</p>
   </section>
+
+  <!-- РАСЧЁТ РЕЖИМА (см. formula-quiz.js) -->
+  <section id="calc" class="screen hidden"><div id="calcRoot"></div></section>
 
   <!-- QUIZ -->
   <section id="quiz" class="screen hidden">
@@ -87,6 +93,7 @@
     </div>
   </section>
 </div>
-<script src="app.js?v=5"></script>
+<script src="app.js?v=6"></script>
+<script type="module" src="formula-quiz.js?v=6"></script>
 </body>
 </html>
