@@ -456,3 +456,17 @@ body{
 .fq-table th,.fq-table td{padding:7px 8px;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap}
 .fq-table th:first-child,.fq-table td:first-child{text-align:left;font-weight:700;position:sticky;left:0}
 .fq-table th{color:var(--hint);font-weight:800}
+
+/* ============================================================
+   Переключатель наборов (КМ-1 / КМ-2), варианты-картинки
+   ============================================================ */
+.ds-switch{display:flex;gap:4px;margin:14px 0 2px;padding:4px;background:var(--glass);border:1px solid var(--border);
+  border-radius:16px;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.ds-btn{flex:1;border:none;background:transparent;color:var(--hint);font-family:var(--font);font-weight:800;font-size:14px;
+  letter-spacing:.2px;padding:11px 8px;border-radius:12px;cursor:pointer;transition:background .2s ease,color .2s ease,transform .12s ease}
+.ds-btn:active{transform:scale(.97)}
+.ds-btn.on{background:var(--accent-grad);color:#fff;box-shadow:var(--shadow-glow)}
+.opt-img{display:block;max-width:100%;height:auto;border-radius:8px;background:#fff;padding:6px;box-sizing:border-box}
+.explain .opt-img{display:inline-block;max-width:260px;vertical-align:middle;margin-top:6px}
+.qfigure img+img{margin-top:8px}
+.otext sub,.otext sup,.qtext sub,.qtext sup,.explain sub,.explain sup{font-size:.72em;line-height:0}

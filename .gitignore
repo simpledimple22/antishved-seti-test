@@ -1,4 +1,6 @@
 .DS_Store
 *.log
 Test1.pdf
+Test2.pdf
 node_modules/
+scripts/km2_review.json
