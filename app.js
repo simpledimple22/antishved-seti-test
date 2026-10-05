@@ -7,8 +7,33 @@ if (IN_TG) {
   try {
     TG.ready(); TG.expand();
     document.body.classList.add('tg');
-    if (TG.setHeaderColor) { try { TG.setHeaderColor('secondary_bg_color'); } catch(e){} }
   } catch (e) {}
+}
+
+/* ===== Тема: светлая по умолчанию, тёмная — по переключателю ===== */
+const THEME_STORE = 'seti_theme';
+const THEME_BG = { light: '#f2f3fb', dark: '#0a0d16' };
+function applyTheme(theme){
+  document.documentElement.dataset.theme = theme;
+  const bg = THEME_BG[theme];
+  const meta = document.querySelector('meta[name="theme-color"]'); if (meta) meta.content = bg;
+  if (IN_TG) {
+    try { TG.setHeaderColor && TG.setHeaderColor(bg); } catch(e){}
+    try { TG.setBackgroundColor && TG.setBackgroundColor(bg); } catch(e){}
+    try { TG.setBottomBarColor && TG.setBottomBarColor(bg); } catch(e){}
+  }
+}
+applyTheme(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
+{
+  const t = document.getElementById('darkTheme');
+  if (t) {
+    t.checked = document.documentElement.dataset.theme === 'dark';
+    t.onchange = () => {
+      const theme = t.checked ? 'dark' : 'light';
+      try { localStorage.setItem(THEME_STORE, theme); } catch(e){}
+      applyTheme(theme); haptic();
+    };
+  }
 }
 function haptic(type){ try{ if(TG&&TG.HapticFeedback){ if(type==='ok'||type==='bad') TG.HapticFeedback.notificationOccurred(type==='ok'?'success':'error'); else TG.HapticFeedback.impactOccurred('light'); } }catch(e){} }
 

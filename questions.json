@@ -1076,7 +1076,6 @@
   "correct": [
    0
   ],
-  "uncertain": true,
   "id": 62
  },
  {
@@ -2440,7 +2439,6 @@
   "correct": [
    3
   ],
-  "uncertain": true,
   "id": 140
  },
  {
@@ -2563,7 +2561,6 @@
    0,
    3
   ],
-  "uncertain": true,
   "id": 147
  },
  {
@@ -2591,7 +2588,6 @@
    7,
    8
   ],
-  "uncertain": true,
   "id": 148
  },
  {
@@ -2615,7 +2611,6 @@
    3,
    7
   ],
-  "uncertain": true,
   "id": 149
  },
  {
@@ -2642,7 +2637,6 @@
    6,
    8
   ],
-  "uncertain": true,
   "id": 150
  },
  {
@@ -2666,7 +2660,6 @@
    4,
    7
   ],
-  "uncertain": true,
   "id": 151
  },
  {
@@ -2693,7 +2686,6 @@
    6,
    8
   ],
-  "uncertain": true,
   "id": 152
  },
  {
@@ -2716,7 +2708,6 @@
    0,
    3
   ],
-  "uncertain": true,
   "id": 153
  },
  {
@@ -2744,7 +2735,6 @@
    7,
    8
   ],
-  "uncertain": true,
   "id": 154
  },
  {
@@ -3859,7 +3849,6 @@
   "correct": [
    3
   ],
-  "uncertain": true,
   "id": 217
  },
  {

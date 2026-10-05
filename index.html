@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover, user-scalable=no">
-<meta name="color-scheme" content="dark light">
-<meta name="theme-color" content="#0a0d16">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f2f3fb">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('seti_theme')==='dark'?'dark':'light';}catch(e){document.documentElement.dataset.theme='light';}</script>
 <title>Сети — тренажёр теста</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +14,7 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-<link rel="stylesheet" href="styles.css?v=7">
+<link rel="stylesheet" href="styles.css?v=8">
 </head>
 <body>
 <div class="bg-glow" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="grain"></span></div>
@@ -43,6 +44,7 @@
 
     <div class="opts">
       <label class="switch"><input type="checkbox" id="shuffleOpts" checked><span>Перемешивать варианты ответов</span></label>
+      <label class="switch"><input type="checkbox" id="darkTheme"><span>Тёмная тема</span></label>
     </div>
 
     <h2 class="section-title">Разделы</h2>
@@ -95,7 +97,7 @@
     </div>
   </section>
 </div>
-<script src="app.js?v=7"></script>
-<script type="module" src="formula-quiz.js?v=7"></script>
+<script src="app.js?v=8"></script>
+<script type="module" src="formula-quiz.js?v=8"></script>
 </body>
 </html>
