@@ -121,7 +121,7 @@ function renderHome(){
   const sw=$('#dsSwitch'); sw.textContent='';
   Object.entries(DATASETS).forEach(([k,d])=>{
     const b=el('button','ds-btn'+(k===DS_KEY?' on':''),d.title); b.type='button';
-    b.onclick=()=>{ if(k===DS_KEY) return; useDataset(k).catch(()=>alertMsg('Не удалось загрузить набор «'+d.title+'».')); };
+    b.onclick=()=>{ if(k===DS_KEY) return; track('dataset/'+d.title, 'Выбрал набор: '+d.title); useDataset(k).catch(()=>alertMsg('Не удалось загрузить набор «'+d.title+'».')); };
     sw.append(b);
   });
   // global stats
@@ -170,12 +170,16 @@ $('#resetBtn').onclick=()=>{ if(confirm('Сбросить прогресс на�
 
 function alertMsg(t){ if(TG&&TG.showAlert){ try{TG.showAlert(t); return;}catch(e){} } alert(t); }
 
+/* ===== Статистика (GoatCounter): события, без личных данных ===== */
+function track(path, title){ try{ window.goatcounter && window.goatcounter.count && window.goatcounter.count({ path, title: title||path, event: true }); }catch(e){} }
+
 /* ===== Quiz ===== */
 function startQuiz(items, label){
   if(!items||!items.length){ alertMsg('Нет вопросов для этого режима.'); return; }
   // items are used in the order given by the caller — callers that want
   // randomized order (random mode, wrong-answers review) shuffle explicitly.
   session = { label, items: items.slice(), i:0, correct:0, wrong:[], answered:false, shuffleOpts:$('#shuffleOpts').checked };
+  track('start/'+DATASETS[DS_KEY].title+'/'+label, 'Начал: '+DATASETS[DS_KEY].title+' — '+label);
   showScreen('quiz');
   if(IN_TG&&TG.BackButton){ try{ TG.BackButton.show(); TG.BackButton.onClick(exitQuiz);}catch(e){} }
   renderQuestion();
@@ -320,6 +324,7 @@ function nextQuestion(){
 /* ===== Result ===== */
 function finish(){
   const s=session; const total=s.items.length; const pct=Math.round(s.correct/total*100);
+  track('finish/'+DATASETS[DS_KEY].title+'/'+s.label, 'Закончил: '+DATASETS[DS_KEY].title+' — '+s.label);
   showScreen('result');
   if(TG&&TG.MainButton){ try{TG.MainButton.hide();}catch(e){} }
   if(TG&&TG.BackButton){ try{TG.BackButton.hide();}catch(e){} }
@@ -344,4 +349,4 @@ function showScreen(name){
 }
 
 /* Мост для модуля «Расчёт режима» (formula-quiz.js, ES-модуль) */
-window.SetiApp = { showScreen, renderHome, haptic, alertMsg, get IN_TG(){ return IN_TG; }, TG };
+window.SetiApp = { showScreen, renderHome, haptic, alertMsg, track, get IN_TG(){ return IN_TG; }, TG };

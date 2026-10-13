@@ -74,6 +74,7 @@ async function loadData() {
 /* ───────── навигация ───────── */
 async function open() {
   App().showScreen('calc');
+  App().track?.('calc/open', 'Открыл «Расчёт режима»');
   root.replaceChildren(el('p', 'fq-muted', 'Загрузка…'));
   try { await loadData(); } catch (e) {
     root.replaceChildren(el('p', 'fq-muted', 'Не удалось загрузить материалы модуля (content/, fixtures/).'));
