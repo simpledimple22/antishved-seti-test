@@ -450,7 +450,7 @@ body{
 .fq-table th{color:var(--hint);font-weight:800}
 
 /* ============================================================
-   Переключатель наборов (КМ-1 / КМ-2), варианты-картинки
+   Переключатель наборов (Тест 1 / Тест 2), варианты-картинки
    ============================================================ */
 .ds-switch{display:flex;gap:4px;margin:14px 0 2px;padding:4px;background:var(--glass);border:1px solid var(--border);
   border-radius:16px;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}

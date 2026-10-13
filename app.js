@@ -40,8 +40,8 @@ function haptic(type){ try{ if(TG&&TG.HapticFeedback){ if(type==='ok'||type==='b
 /* ===== State ===== */
 // Наборы вопросов. У каждого свой файл и своё хранилище прогресса.
 const DATASETS = {
-  km1: { title: 'КМ-1', file: 'questions.json', ls: 'seti_progress_v1' },
-  km2: { title: 'КМ-2', file: 'questions_km2.json', ls: 'seti_progress_km2_v1' },
+  km1: { title: 'Тест 1', file: 'questions.json', ls: 'seti_progress_v1' },
+  km2: { title: 'Тест 2', file: 'questions_km2.json', ls: 'seti_progress_km2_v1' },
 };
 const DS_STORE = 'seti_dataset';
 let DS_KEY = (()=>{ try{ const k=localStorage.getItem(DS_STORE); return DATASETS[k]?k:'km1'; }catch(e){ return 'km1'; } })();
