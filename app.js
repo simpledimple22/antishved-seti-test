@@ -196,7 +196,7 @@ function renderQuestion(){
   if(q.uncertain||q.no_mark) meta.appendChild(el('span','chip warn','⚠ проверить'));
   // figure(s): old format — q.figure (имя в images/), new — q.figures (пути)
   const fig=$('#qfigure');
-  const figs = q.figures ? q.figures : (q.figure ? ['images/'+q.figure+'.jpg'] : []);
+  const figs = q.figures ? q.figures : (q.figure ? ['images/'+q.figure+'.jpg?v=2'] : []);
   if(figs.length){
     fig.className='qfigure'; fig.textContent='';
     const label = q.figure ? figLabel(q.figure) : 'рисунок к вопросу';
