@@ -462,3 +462,39 @@ body{
 .explain .opt-img{display:inline-block;max-width:260px;vertical-align:middle;margin-top:6px}
 .qfigure img+img{margin-top:8px}
 .otext sub,.otext sup,.qtext sub,.qtext sup,.explain sub,.explain sup{font-size:.72em;line-height:0}
+
+/* ============================================================
+   Широкий экран (ноутбук / компьютер в браузере)
+   На телефоне и в Telegram обёртки «прозрачны» — порядок блоков прежний.
+   ============================================================ */
+.home-main,.home-side{display:contents}
+#home #resetBtn,#home .footnote{order:1}
+
+@media (min-width:1024px){
+  #app{ max-width:1240px; width:calc(100% - 48px); margin:24px auto; max-height:calc(100vh - 48px); }
+
+  /* Главная: слева меню, справа разделы */
+  #home{ display:grid; grid-template-columns:minmax(340px,400px) minmax(0,1fr); gap:0 32px; align-items:start; padding:24px 28px; }
+  .home-main,.home-side{ display:block; min-width:0; }
+  .home-side .section-title{ margin-top:22px; }
+  .section-list{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:9px; }
+  .sec-item{ height:100%; }
+
+  /* Вопрос: рисунок слева, вопрос и варианты справа */
+  .quiz-top{ padding:14px 28px; }
+  .quiz-scroll{ padding:22px 28px 24px; }
+  .quiz-scroll > *{ max-width:820px; margin-left:auto; margin-right:auto; width:100%; }
+  .quiz-scroll:has(> .qfigure:not(.hidden)){
+    display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); grid-template-rows:auto auto auto 1fr;
+    gap:0 28px; align-items:start;
+  }
+  .quiz-scroll:has(> .qfigure:not(.hidden)) > *{ max-width:none; grid-column:2; }
+  .quiz-scroll:has(> .qfigure:not(.hidden)) > .qfigure{ grid-column:1; grid-row:1 / 5; position:sticky; top:0; margin:0; }
+  .qtext{ font-size:21px; }
+  .opt .otext{ font-size:16px; }
+  .quiz-actions{ padding-left:28px; padding-right:28px; }
+  .action-btn{ display:block; max-width:420px; margin:0 auto; }
+
+  /* Расчёт режима */
+  .fq{ max-width:900px; margin:0 auto; width:100%; padding:8px 12px 28px; }
+}
